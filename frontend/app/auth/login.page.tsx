@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-import Link from 'next/link';
+
+import "../../public/scss/login.scss"
 
 interface ErrorResponse {
     response: {
@@ -15,6 +16,7 @@ interface ErrorResponse {
 export default function LoginPage() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [error, setError] = useState<string>("");
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -25,37 +27,42 @@ export default function LoginPage() {
             localStorage.setItem("authToken", token);
 
             alert("로그인 성공! 환영한다 게이야");
+            setError("")
         } catch (err) {
             const e = err as ErrorResponse;
             console.error(e.response.data.message);
+            setError("로그인 실패! 이메일과 비밀번호를 확인해주세요.");
         }
     }
     return (
-        <div>
+        <div className="login-container">
+            <h1>로그인</h1>
+            {error && <p>{error}</p>}
             <form onSubmit={handleLogin}>
-                <div>
-                    <label htmlFor="email">Email</label>
+                <div className="input-container">
+                    <label htmlFor="email">이메일</label>
                     <input
                         id="email"
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
+                        placeholder="이메일 입력하세요."
                     />
                 </div>
-                <div>
-                    <label htmlFor="password">Password</label>
+                <div className="input-container">
+                    <label htmlFor="password">비밀번호</label>
                     <input
                         id="password"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
+                        placeholder="비밀번호 입력하세요."
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit">로그인</button>
             </form>
-            Don't have an account? <Link href="/auth/signup">Sign up</Link>
         </div>
     );
 }

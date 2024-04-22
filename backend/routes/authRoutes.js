@@ -35,7 +35,7 @@ router.post('/signup', async (req, res) => {
         // 이메일 중복 체크
         let user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
         if (user.rows.length > 0) {
-            return res.status(401).json({ message: "User already exists" });
+            return res.status(401).json({ message: "해당 유저가 이미 존재해요. 다른 이메일 혹은 유저명으로 등록해주세요." });
         }
 
         // 비밀번호 해시 생성

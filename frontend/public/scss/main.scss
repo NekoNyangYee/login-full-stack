@@ -1,0 +1,39 @@
+body {
+  background: {
+    image: url("/background.jpg");
+    size: cover;
+    position: center;
+    repeat: no-repeat;
+    attachment: fixed;
+  }
+}
+
+html {
+  height: 100vh;
+}
+
+input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  border: none;
+}
+
+button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 70%;
+  margin: 0 auto;
+  justify-content: space-around;
+  align-items: center;
+}

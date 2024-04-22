@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { redirect } from 'next/navigation';
+
+import "../../public/scss/signup.scss"
 
 export default function SignupPage() {
     const [username, setUsername] = useState('');
@@ -27,8 +28,6 @@ export default function SignupPage() {
             // 회원가입 API 요청
             await axios.post('http://localhost:5000/api/auth/signup', { username, email, password });
             alert("회원가입 되었습니다.");
-            // 회원가입 후 로그인 페이지로 이동
-            redirect('/auth/login');
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 // 'error'가 AxiosError이면, 안전하게 'response' 속성에 접근할 수 있습니다.
@@ -42,11 +41,11 @@ export default function SignupPage() {
     };
 
     return (
-        <div>
-            <h1>Sign Up</h1>
+        <div className='signup-container'>
+            <h1>회원가입</h1>
             <form onSubmit={handleSignup}>
-                <div>
-                    <label htmlFor="username">Username</label>
+                <div className="input-container">
+                    <label htmlFor="username">닉네임</label>
                     <input
                         id="username"
                         type="text"
@@ -55,8 +54,8 @@ export default function SignupPage() {
                         required
                     />
                 </div>
-                <div>
-                    <label htmlFor="email">Email</label>
+                <div className="input-container">
+                    <label htmlFor="email">이메일</label>
                     <input
                         id="email"
                         type="email"
@@ -65,8 +64,8 @@ export default function SignupPage() {
                         required
                     />
                 </div>
-                <div>
-                    <label htmlFor="password">Password</label>
+                <div className="input-container">
+                    <label htmlFor="password">비밀번호</label>
                     <input
                         id="password"
                         type="password"
@@ -75,7 +74,7 @@ export default function SignupPage() {
                         required
                     />
                 </div>
-                <button type="submit">Sign Up</button>
+                <button type="submit">회원가입</button>
             </form>
         </div>
     );

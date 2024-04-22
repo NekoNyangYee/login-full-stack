@@ -1,12 +1,12 @@
-import Image from "next/image";
 import LoginPage from "./auth/login.page";
 import SignupPage from "./auth/signup.page";
+import "../public/scss/main.scss";
 
 export default function Home() {
   return (
-    <main>
+    <div className="container">
       <LoginPage />
       <SignupPage />
-    </main>
+    </div>
   );
 }
