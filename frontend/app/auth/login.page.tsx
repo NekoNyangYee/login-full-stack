@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import { useRouter } from 'next/navigation'
 
 import "../../public/scss/login.scss"
 
@@ -17,6 +18,7 @@ export default function LoginPage() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string>("");
+    const router = useRouter();
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -28,6 +30,7 @@ export default function LoginPage() {
 
             alert("로그인 성공! 환영한다 게이야");
             setError("")
+            router.push("/main");
         } catch (err) {
             const e = err as ErrorResponse;
             console.error(e.response.data.message);
