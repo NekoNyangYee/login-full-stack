@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from 'next/navigation'
 
 import "../../public/scss/login.scss"
+import Link from "next/link";
 
 interface ErrorResponse {
     response: {
@@ -65,6 +66,8 @@ export default function LoginPage() {
                     />
                 </div>
                 <button type="submit">로그인</button>
+
+                <p>비밀번호를 잊으셨나요? <Link href="/forgotpassword">비밀번호 찾기</Link></p>
             </form>
         </div>
     );
