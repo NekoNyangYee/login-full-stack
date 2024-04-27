@@ -114,6 +114,7 @@ router.post('/forgot-password', async (req, res) => {
 router.post('/reset-password', async (req, res) => {
     const { token, newPassword } = req.body;
     try {
+        console.log('Received token for password reset:', token);
         const user = await pool.query("SELECT * FROM users WHERE reset_token = $1 AND reset_token_expires > NOW()", [token]);
         if (user.rows.length === 0) {
             return res.status(400).json({ message: "유효하지 않은 토큰이에요." });
@@ -133,6 +134,7 @@ router.post('/reset-password', async (req, res) => {
 // 서버에서 토큰을 검증하는 API 예시
 router.get('/validate-reset-token', async (req, res) => {
     const { token } = req.query;
+    console.log('Validating token:', token);
     try {
         // 토큰과 만료시간을 확인하는 쿼리
         const user = await pool.query("SELECT * FROM users WHERE reset_token = $1 AND reset_token_expires > NOW()", [token]);
