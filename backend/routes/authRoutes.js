@@ -62,7 +62,7 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/forgot-password', async (req, res) => {
-    const { email, user } = req.body;
+    const { email } = req.body;
     try {
         const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
         if (user.rows.length === 0) {
@@ -89,7 +89,7 @@ router.post('/forgot-password', async (req, res) => {
             subject: `비밀번호 재설정 관련 메일입니다.`,
             text: `귀하(또는 다른 사람)가 귀하 계정의 비밀번호 재설정을 요청했기 때문에 이 메일을 보내드립니다.\n\n
             Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:\n\n
-            http://${req.headers.host}/reset-password?token=${resetToken}\n\n
+            http://localhost:3000/auth/resetpassword?token=${resetToken}\n\n
             요청하지 않은 경우 이 이메일을 무시하시면 귀하의 비밀번호는 변경되지 않습니다.`
         };
 
@@ -129,5 +129,23 @@ router.post('/reset-password', async (req, res) => {
         res.status(500).send("Server error");
     }
 });
+
+// 서버에서 토큰을 검증하는 API 예시
+router.get('/validate-reset-token', async (req, res) => {
+    const { token } = req.query;
+    try {
+        // 토큰과 만료시간을 확인하는 쿼리
+        const user = await pool.query("SELECT * FROM users WHERE reset_token = $1 AND reset_token_expires > NOW()", [token]);
+        if (user.rows.length > 0) {
+            res.json({ valid: true });
+        } else {
+            res.json({ valid: false });
+        }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
+
 
 module.exports = router;

@@ -67,7 +67,7 @@ export default function LoginPage() {
                 </div>
                 <button type="submit">로그인</button>
 
-                <p>비밀번호를 잊으셨나요? <Link href="/forgotpassword">비밀번호 찾기</Link></p>
+                <p>비밀번호를 잊으셨나요? <Link href="/auth/forgotpassword">비밀번호 찾기</Link></p>
             </form>
         </div>
     );
