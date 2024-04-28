@@ -88,7 +88,7 @@ router.post('/forgot-password', async (req, res) => {
             to: email,
             subject: `비밀번호 재설정 관련 메일입니다.`,
             text: `귀하(또는 다른 사람)가 귀하 계정의 비밀번호 재설정을 요청했기 때문에 이 메일을 보내드립니다.\n\n
-            Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:\n\n
+            아래의 링크를 클릭하거나 브라우저 검색창에 복사 및 붙여넣기를 하여 접속 후 비밀번호를 변경바랍니다.:\n\n
             http://localhost:3000/auth/resetpassword?token=${resetToken}\n\n
             요청하지 않은 경우 이 이메일을 무시하시면 귀하의 비밀번호는 변경되지 않습니다.`
         };

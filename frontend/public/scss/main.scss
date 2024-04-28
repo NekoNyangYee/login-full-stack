@@ -1,15 +1,9 @@
-body {
-  background: {
-    image: url("/background.jpg");
-    size: cover;
-    position: center;
-    repeat: no-repeat;
-    attachment: fixed;
-  }
-}
-
 html {
   height: 100vh;
+}
+
+body {
+  background-color: lightgray;
 }
 
 input {
@@ -29,11 +23,18 @@ button {
 }
 
 .container {
-  display: flex;
-  gap: 1rem;
   width: 100%;
   max-width: 70%;
   margin: 0 auto;
   justify-content: space-around;
   align-items: center;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

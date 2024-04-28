@@ -4,11 +4,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import "../../public/scss/signup.scss"
+import "../../public/scss/main.scss"
+import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const router = useRouter();
 
     const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -28,6 +32,7 @@ export default function SignupPage() {
             // 회원가입 API 요청
             await axios.post('http://localhost:5000/api/auth/signup', { username, email, password });
             alert("회원가입 되었습니다.");
+            router.push('/');
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 // 'error'가 AxiosError이면, 안전하게 'response' 속성에 접근할 수 있습니다.

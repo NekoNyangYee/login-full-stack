@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import '../../../public/scss/main.scss'
+
 export const ForgotPwdComponent = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');

@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import '../../public/scss/main.scss';
+
 const Main = () => {
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const router = useRouter();
