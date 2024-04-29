@@ -149,5 +149,22 @@ router.get('/validate-reset-token', async (req, res) => {
     }
 });
 
+router.post('/missing-id', async (req, res) => {
+    const { username } = req.body;
+    try {
+        // 여기서 `email` 필드가 사용자가 입력한 `username`과 일치하는지 확인합니다.
+        const user = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
+        if (user.rows.length === 0) {
+            return res.status(404).json({ message: "해당 사용자로 아이디를 찾을 수 없어요. 다시 시도해주세요." });
+        }
+        // 사용자가 있으면, 사용자 정보를 포함하여 응답을 반환합니다.
+        return res.json({ email: user.rows[0].email });
+
+    } catch (err) {
+        // 오류 처리
+        return res.status(500).json({ message: "Server error." });
+    }
+});
+
 
 module.exports = router;
